@@ -26,6 +26,9 @@ public class Venda {
     private LocalTime hora;
     private Double valorTotal;
 
+    @ManyToOne
+    private Funcionario funcionario;
+
     @OneToMany(mappedBy = "venda")
     private Set<VendaCartoes> cartoes;
 
