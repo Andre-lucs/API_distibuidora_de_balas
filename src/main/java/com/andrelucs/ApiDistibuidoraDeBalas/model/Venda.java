@@ -1,6 +1,7 @@
 package com.andrelucs.ApiDistibuidoraDeBalas.model;
 
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.VendaCartoes;
+import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.VendaProduto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,12 @@ public class Venda {
 
     @OneToMany(mappedBy = "venda")
     private Set<VendaCartoes> cartoes;
+
+    @OneToMany(mappedBy = "venda")
+    private Set<VendaProduto> produtos;
+
+    @OneToOne
+    private Cupom cupom;
 
     @PrePersist
     public void prePersist() {
