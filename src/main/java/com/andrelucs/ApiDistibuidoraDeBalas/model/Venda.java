@@ -27,8 +27,8 @@ public class Venda {
     private LocalTime hora;
     private Double valorTotal;
 
-    @ManyToOne
-    private Funcionario funcionario;
+   // @ManyToOne
+    // private Funcionario funcionario;
 
     @OneToMany(mappedBy = "venda")
     private Set<VendaCartoes> cartoes;
@@ -36,7 +36,7 @@ public class Venda {
     @OneToMany(mappedBy = "venda")
     private Set<VendaProduto> produtos;
 
-    @OneToOne
+    @OneToOne(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cupom cupom;
 
     @PrePersist
@@ -48,7 +48,18 @@ public class Venda {
             hora = LocalTime.now();
         }
     }
-
+    public Venda setValorTotal(Double valorTotal, String nome, String telefone, String endereco, Venda venda) {
+        if (valorTotal > 100) {
+            Cupom cupom = new Cupom();
+            cupom.setNome(nome);
+            cupom.setTelefone(telefone);
+            cupom.setEndereco(endereco);
+            cupom.setVenda(venda);
+            venda.setCupom(cupom);
+        }
+        this.valorTotal = valorTotal;
+        return venda;
+    }
     @Override
     public String toString() {
         return "Venda{" +
@@ -59,4 +70,7 @@ public class Venda {
                 ", valorTotal=" + valorTotal +
                 '}';
     }
+
+
+
 }

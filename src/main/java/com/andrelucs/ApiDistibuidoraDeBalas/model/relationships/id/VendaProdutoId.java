@@ -19,7 +19,7 @@ import java.util.UUID;
 public class VendaProdutoId implements Serializable {
 
     @Column (name = "codigo_de_barras")
-    private Long codBarras;
+    private UUID codBarras;
 
     @Column (name = "codigo_venda")
     private UUID codigoVenda;

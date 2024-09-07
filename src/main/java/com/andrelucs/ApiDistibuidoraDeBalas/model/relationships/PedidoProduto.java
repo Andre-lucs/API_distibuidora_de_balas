@@ -1,6 +1,7 @@
 package com.andrelucs.ApiDistibuidoraDeBalas.model.relationships;
 
 import com.andrelucs.ApiDistibuidoraDeBalas.model.Pedido;
+import com.andrelucs.ApiDistibuidoraDeBalas.model.Produto;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.id.PedidoProdutoId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

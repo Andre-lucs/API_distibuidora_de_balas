@@ -1,5 +1,6 @@
 package com.andrelucs.ApiDistibuidoraDeBalas.service;
 
+import com.andrelucs.ApiDistibuidoraDeBalas.model.Cupom;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.Venda;
 import com.andrelucs.ApiDistibuidoraDeBalas.repository.VendaRepository;
 import lombok.AllArgsConstructor;
