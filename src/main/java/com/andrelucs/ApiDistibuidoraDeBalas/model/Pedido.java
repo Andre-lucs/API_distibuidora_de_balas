@@ -24,8 +24,8 @@ public class Pedido {
     @ManyToOne
     private Fornecedor fornecedor;
 
-    @ManyToOne
-    private Funcionario funcionario;
+//    @ManyToOne
+//    private Funcionario funcionario;
 
     @OneToMany(mappedBy = "pedido")
     private Set<PedidoProduto> pedidos;
@@ -44,7 +44,7 @@ public class Pedido {
                 ", data=" + data +
                 ", status='" + status + '\'' +
                 ", fornecedor=" + fornecedor +
-                ", funcionario=" + funcionario +
+//                ", funcionario=" + funcionario +
                 '}';
     }
 }

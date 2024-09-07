@@ -13,8 +13,7 @@ import lombok.Setter;
 @Setter
 public class Fornecedor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cnpj;
+    private String cnpj;
 
     @Column(unique = true)
     private String razaoSocial;
