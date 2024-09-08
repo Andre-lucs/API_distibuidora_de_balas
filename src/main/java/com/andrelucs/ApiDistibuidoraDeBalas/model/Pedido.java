@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 public class Pedido {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.UUID )
     private UUID codigo;
     private Double valor;
     private LocalDate data;
@@ -24,7 +24,7 @@ public class Pedido {
     @ManyToOne
     private Fornecedor fornecedor;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Funcionario funcionario;
 
     @OneToMany(mappedBy = "pedido")

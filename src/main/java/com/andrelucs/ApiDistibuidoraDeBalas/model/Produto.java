@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID codBarras;
 
     private String descricao;
