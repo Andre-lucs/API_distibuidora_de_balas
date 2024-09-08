@@ -31,4 +31,8 @@ public class Funcionario {
 
     @OneToMany(mappedBy = "funcionario")
     private List<Dependente> dependentes;
+
+    @OneToMany (mappedBy = "funcionario")
+    private List<Pedido> pedidos;
+
 }
