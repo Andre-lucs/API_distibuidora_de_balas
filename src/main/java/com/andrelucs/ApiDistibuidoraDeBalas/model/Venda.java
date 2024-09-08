@@ -27,8 +27,8 @@ public class Venda {
     private LocalTime hora;
     private Double valorTotal;
 
-   // @ManyToOne
-    // private Funcionario funcionario;
+    @ManyToOne
+    private Funcionario funcionario;
 
     @OneToMany(mappedBy = "venda")
     private Set<VendaCartoes> cartoes;
@@ -48,7 +48,7 @@ public class Venda {
             hora = LocalTime.now();
         }
     }
-    public Venda setValorTotal(Double valorTotal, String nome, String telefone, String endereco, Venda venda) {
+    public Venda setValorTotal(Double valorTotal, String nome, String telefone, String endereco, Venda venda, Funcionario funcionario) {
         if (valorTotal > 100) {
             Cupom cupom = new Cupom();
             cupom.setNome(nome);
@@ -56,6 +56,7 @@ public class Venda {
             cupom.setEndereco(endereco);
             cupom.setVenda(venda);
             venda.setCupom(cupom);
+            venda.setFuncionario(funcionario);
         }
         this.valorTotal = valorTotal;
         return venda;
