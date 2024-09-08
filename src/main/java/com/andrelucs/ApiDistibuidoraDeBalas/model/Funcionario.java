@@ -1,8 +1,7 @@
 package com.andrelucs.ApiDistibuidoraDeBalas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,8 @@ import java.util.List;
 @Setter
 public class Funcionario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codigo;
     private String cpf;
     private String nome;
     private String telefone;
