@@ -25,7 +25,7 @@ public class VendaProduto {
     private Venda venda;
 
     @ManyToOne
-    @MapsId("numeroCartao")
+    @MapsId("codBarras")
     @JoinColumn(name = "codigo_de_barra")
     private Produto produto;
 
