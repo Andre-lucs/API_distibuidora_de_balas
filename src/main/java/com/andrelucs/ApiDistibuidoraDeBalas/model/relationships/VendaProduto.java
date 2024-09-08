@@ -1,9 +1,8 @@
 package com.andrelucs.ApiDistibuidoraDeBalas.model.relationships;
 
-import com.andrelucs.ApiDistibuidoraDeBalas.model.Cartao;
+
 import com.andrelucs.ApiDistibuidoraDeBalas.model.Produto;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.Venda;
-import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.id.VendaCartoesId;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.id.VendaProdutoId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

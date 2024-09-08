@@ -7,10 +7,7 @@ import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.id.PedidoProduto
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.id.VendaCartoesId;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.VendaCartoes;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.id.VendaProdutoId;
-import com.andrelucs.ApiDistibuidoraDeBalas.repository.CartaoRepository;
-import com.andrelucs.ApiDistibuidoraDeBalas.repository.FornecedorRepository;
-import com.andrelucs.ApiDistibuidoraDeBalas.repository.ProdutoRepository;
-import com.andrelucs.ApiDistibuidoraDeBalas.repository.VendaRepository;
+import com.andrelucs.ApiDistibuidoraDeBalas.repository.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -19,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,20 +32,49 @@ public class Loader implements CommandLineRunner {
 
     private final FornecedorRepository fornecedorRepository;
 
+    private  final FuncionarioRepository funcionarioRepository;
+
+    private  final DependenteRepository dependenteRepository;
+
     @PersistenceContext
     private final EntityManager entityManager;
 
-    public Loader(CartaoRepository cartaoRepository, VendaRepository vendaRepository, ProdutoRepository produtoRepository, FornecedorRepository fornecedorRepository, EntityManager entityManager) {
+    public Loader(CartaoRepository cartaoRepository, VendaRepository vendaRepository, ProdutoRepository produtoRepository, FornecedorRepository fornecedorRepository, EntityManager entityManager, FuncionarioRepository funcionarioRepository, DependenteRepository dependenteRepository) {
         this.cartaoRepository = cartaoRepository;
         this.vendaRepository = vendaRepository;
         this.produtoRepository = produtoRepository;
         this.fornecedorRepository = fornecedorRepository;
         this.entityManager = entityManager;
+        this.funcionarioRepository = funcionarioRepository;
+        this.dependenteRepository = dependenteRepository;
+
     }
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+
+        //Criando e salvando Funcionario
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNome("Carlos Silva");
+        funcionario.setCpf("11177788837");
+        funcionario.setCargo("Atendente");
+        funcionario.setSalario(1200.00);
+        funcionario.setDataAdmissao(LocalDate.now());
+        funcionario.setEndereco("Rua das Flores");
+        funcionario.setTelefone("839991110849");
+        var funcionarioSalvo = funcionarioRepository.save(funcionario);
+
+
+        // Criando e salvando dependentes
+        Dependente dependente = new Dependente();
+        dependente.setCpf("73746749821");
+        dependente.setNome("Geraldo Silva");
+        dependente.setRegistroGeral("39848978478974");
+        dependente.setFuncionario(funcionario);
+        var dependenteSalvo = dependenteRepository.save(dependente);
+
+
         //Criando e salvando fornecedor
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setCnpj("70.108.090/0001-20");
@@ -67,6 +94,8 @@ public class Loader implements CommandLineRunner {
         pedido.setFornecedor(fornecedorSalvo);
         pedido.setValor(1713D);
         pedido.setStatus("Pendente");
+        pedido.setFuncionario(funcionario);
+
 
         //Criando relacionamento entre pedido e produto
         PedidoProduto pedidoProdutoRelacao= new PedidoProduto();
@@ -94,7 +123,7 @@ public class Loader implements CommandLineRunner {
 
         // criando venda
         Venda venda = new Venda();
-        Venda vendaCupom= venda.setValorTotal(232d,"Andre","8399999999","Rua Projetada", venda);
+        Venda vendaCupom= venda.setValorTotal(232d,"Andre","8399999999","Rua Projetada", venda, funcionario);
         venda = vendaRepository.save(vendaCupom);
 
 
