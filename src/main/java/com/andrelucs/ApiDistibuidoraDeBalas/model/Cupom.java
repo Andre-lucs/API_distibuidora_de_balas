@@ -1,10 +1,7 @@
 package com.andrelucs.ApiDistibuidoraDeBalas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -26,4 +23,13 @@ public class Cupom {
     @OneToOne
     private Venda venda;
 
+    @Override
+    public String toString() {
+        return "Cupom{" +
+                "endereco='" + endereco + '\'' +
+                ", id=" + id +
+                ", nome='" + nome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
+    }
 }

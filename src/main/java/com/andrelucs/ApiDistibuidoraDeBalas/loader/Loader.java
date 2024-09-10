@@ -123,7 +123,8 @@ public class Loader implements CommandLineRunner {
 
         // criando venda
         Venda venda = new Venda();
-        Venda vendaCupom= venda.setValorTotal(232d,"Andre","8399999999","Rua Projetada", venda, funcionario);
+        venda.setFuncionario(funcionario);
+        Venda vendaCupom= venda.setValorTotal(232d,"Andre","8399999999","Rua Projetada");
         venda = vendaRepository.save(vendaCupom);
 
 
@@ -152,6 +153,20 @@ public class Loader implements CommandLineRunner {
         Optional<Venda> vendas = vendaRepository.findById(venda.getCodigo());
 
         logger.info("Vendas : {}", vendas);
+
+        Cliente cliente = new Cliente();
+        cliente.setNome("Jose");
+        cliente.setCpf("11111111111");
+        cliente.setEndereco("Rua do Meio");
+        cliente.setTelefone("40028922");
+
+        venda.setCliente(cliente);
+
+        entityManager.persist(venda);
+
+        venda = entityManager.find(venda.getClass(), venda.getCodigo());
+        logger.info("Venda final:" + venda);
+
 
     }
 

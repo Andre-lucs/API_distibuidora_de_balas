@@ -36,4 +36,17 @@ public class Funcionario {
     @OneToMany (mappedBy = "funcionario")
     private List<Pedido> pedidos;
 
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "cargo='" + cargo + '\'' +
+                ", codigo=" + codigo +
+                ", cpf='" + cpf + '\'' +
+                ", dataAdmissao=" + dataAdmissao +
+                ", endereco='" + endereco + '\'' +
+                ", nome='" + nome + '\'' +
+                ", salario=" + salario +
+                ", telefone='" + telefone + '\'' +
+                '}';
+    }
 }

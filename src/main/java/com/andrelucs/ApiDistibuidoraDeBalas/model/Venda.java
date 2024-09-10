@@ -3,10 +3,7 @@ package com.andrelucs.ApiDistibuidoraDeBalas.model;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.VendaCartoes;
 import com.andrelucs.ApiDistibuidoraDeBalas.model.relationships.VendaProduto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Venda {
 
     @Id
@@ -39,6 +37,9 @@ public class Venda {
     @OneToOne(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cupom cupom;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Conta conta;
+
     @PrePersist
     public void prePersist() {
         if (data == null) {
@@ -48,28 +49,24 @@ public class Venda {
             hora = LocalTime.now();
         }
     }
-    public Venda setValorTotal(Double valorTotal, String nome, String telefone, String endereco, Venda venda, Funcionario funcionario) {
+    public Venda setValorTotal(Double valorTotal, String nome, String telefone, String endereco) {
         if (valorTotal > 100) {
             Cupom cupom = new Cupom();
             cupom.setNome(nome);
             cupom.setTelefone(telefone);
             cupom.setEndereco(endereco);
-            cupom.setVenda(venda);
-            venda.setCupom(cupom);
-            venda.setFuncionario(funcionario);
+            cupom.setVenda(this);
+            setCupom(cupom);
         }
         this.valorTotal = valorTotal;
-        return venda;
+        return this;
     }
-    @Override
-    public String toString() {
-        return "Venda{" +
-                "cartoes=" + cartoes +
-                ", codigo=" + codigo +
-                ", data=" + data +
-                ", hora=" + hora +
-                ", valorTotal=" + valorTotal +
-                '}';
+
+    public void setCliente(Cliente cliente){
+        Conta conta = new Conta();
+        conta.setCliente(cliente);
+        conta.setValor(getValorTotal());
+        this.conta = conta;
     }
 
 

@@ -20,8 +20,8 @@ public class Cliente {
     private String telefone;
     private String endereco;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Conta> contas;
+//    @OneToMany(mappedBy = "cliente")
+//    private List<Conta> contas;
 
     @Override
     public String toString() {

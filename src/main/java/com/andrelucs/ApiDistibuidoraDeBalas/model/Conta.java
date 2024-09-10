@@ -21,7 +21,7 @@ public class Conta {
     private Double valor;
     private LocalDate data;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cliente_cpf")
     private Cliente cliente;
 
