@@ -102,6 +102,8 @@ public class Loader implements CommandLineRunner {
         pedidoProdutoRelacao.setPedido(pedido);
         pedidoProdutoRelacao.setProduto(produtoPedidoSalvo);
         pedidoProdutoRelacao.setId(new PedidoProdutoId(pedido.getPedidos(), produtoPedidoSalvo.getCodBarras()));
+        pedidoProdutoRelacao.setQuantidade(1L);
+        pedidoProdutoRelacao.setPrecoUnitario(20000L);
 
         pedido.setPedidos(Set.of(pedidoProdutoRelacao));
         entityManager.persist(pedidoProdutoRelacao);

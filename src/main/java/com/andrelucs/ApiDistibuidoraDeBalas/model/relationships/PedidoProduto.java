@@ -17,6 +17,8 @@ import lombok.Setter;
 public class PedidoProduto {
     @EmbeddedId
     private PedidoProdutoId id;
+    private Long quantidade;
+    private Long precoUnitario;
 
     @ManyToOne
     @MapsId("codigo")
@@ -27,5 +29,6 @@ public class PedidoProduto {
     @MapsId("codBarras")
     @JoinColumn (name = "codigo_de_barras_produto")
     private Produto produto;
+
 
 }
